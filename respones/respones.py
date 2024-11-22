@@ -89,7 +89,7 @@ async def send_items_list(callback: CallbackQuery, page: int = 1):
 async def send_items_list_admin(callback: types.CallbackQuery, page: int = 1):
     items_per_page = 10
     offset = (page - 1) * items_per_page
-    all_items = await db.get_all_items()
+    all_items = await db.get_all_items_admin()
 
     if not all_items:
         keyboard = InlineKeyboardMarkup(inline_keyboard=[

@@ -20,10 +20,10 @@ class AdminStates(StatesGroup):
 @router.message(AdminStates.add_item)
 async def add_item(message: Message, state: FSMContext):
     try:
-        name, description, price, count = map(str.strip, message.text.split("|"))
+        name, description, price, data, count = map(str.strip, message.text.split("|"))
         price, count = int(price), int(count)
-        await db.add_item(name, price, description, count)
-        await message.answer(f"✅ Товар '{name}' успешно добавлен!")
+        await db.add_item(name, price, description, data, count)
+        await message.answer(f"✅ Товар '{name}' успешно добавлен! В количестве {count}")
         await state.clear()
     except ValueError:
         await message.answer("❌ Неверный формат данных. Попробуйте снова.")

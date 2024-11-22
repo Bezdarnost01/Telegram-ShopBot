@@ -68,7 +68,7 @@ async def admin_menu_handler(callback: CallbackQuery):
 @router.callback_query(F.data == "add_item")
 async def add_item_callback(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
-    await callback.message.answer("Введите данные для добавления товара в формате:\n\n<code>Название | Описание | Цена | Количество</code>", parse_mode="HTML")
+    await callback.message.answer("Введите данные для добавления товара в формате:\n\n<code>Название | Описание | Цена | Данные | Количество</code>", parse_mode="HTML")
     await state.set_state(AdminStates.add_item)
 
 @router.callback_query(F.data == "edit_item")

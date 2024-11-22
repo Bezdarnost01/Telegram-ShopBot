@@ -24,7 +24,7 @@ class Database:
                     price INTEGER,
                     description TEXT,
                     data TEXT,
-                    count INTEGER DEFAULT 0
+                    count INTEGER
                 )
             ''')
             await conn.commit()
@@ -126,6 +126,11 @@ class Database:
     async def get_all_items(self):
         async with aiosqlite.connect(self.db_user_path) as conn:
             cursor = await conn.execute("SELECT id, name, price FROM items")
+            return await cursor.fetchall()
+        
+    async def get_all_items_admin(self):
+        async with aiosqlite.connect(self.db_user_path) as conn:
+            cursor = await conn.execute("SELECT id, name, price, count FROM items")
             return await cursor.fetchall()
 
     async def get_all_item_ids_and_names(self):
